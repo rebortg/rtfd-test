@@ -6,7 +6,7 @@
 Welcome to Template Test's documentation!!
 ==========================================
 
-More Text.
+More Text. More Text.
 
 .. toctree::
    :maxdepth: 2
