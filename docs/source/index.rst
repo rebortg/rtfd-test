@@ -22,5 +22,8 @@ Indices and tables
 * :ref:`search`
 
 
-
+.. index:: set interface ethernet eth1
 .. clicmd:: set interface ethernet eth1
+
+
+.. clicmd:: set interface ethernet eth2
