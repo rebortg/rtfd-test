@@ -196,34 +196,9 @@ def make_link_node(rawtext, app, slug, options):
     return node
 
 def vyissue_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
-    """Link to a BitBucket issue.
 
-    Returns 2 part tuple containing list of nodes to insert into the
-    document and a list of system messages.  Both are allowed to be
-    empty.
-
-    :param name: The role name used in the document.
-    :param rawtext: The entire markup snippet, with role.
-    :param text: The text marked with the role.
-    :param lineno: The line number where rawtext appears in the input.
-    :param inliner: The inliner instance that called us.
-    :param options: Directive options for customization.
-    :param content: The directive content for customization.
-    """
     app = inliner.document.settings.env.app
     node = make_link_node(rawtext, app, str(text), options)
-    '''
-    print('======')
-    print(name)
-    print(rawtext)
-    print(text)
-    print(lineno)
-    print(inliner)
-    print(options)
-    print(content)
-    print(node)
-    print('======')
-    '''
     return [node], []
 
 def cfgcmd_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
