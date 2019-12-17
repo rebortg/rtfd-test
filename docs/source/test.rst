@@ -17,6 +17,8 @@ Var 1
 
 :cfgcmd:`set test foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo <aaa | sss>`
 
+normal text
+
 .. list-table:: Title
    :widths: 25 25 50
    :header-rows: 1
