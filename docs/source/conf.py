@@ -86,7 +86,7 @@ html_theme = 'sphinx_rtd_theme'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
+templates_path = ['_template']
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
 #
@@ -172,5 +172,71 @@ epub_title = project
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
+from docutils import nodes, utils
+from docutils.parsers.rst.roles import set_classes
+from docutils.statemachine import ViewList
+from docutils.parsers.rst import Directive, directives
+from sphinx.util.nodes import nested_parse_with_titles
+
+
+def make_link_node(rawtext, app, slug, options):
+    """Create a link to a vyos_phabricator_url.
+
+    :param rawtext: Text being replaced with link node.
+    :param app: Sphinx application context
+    :param slug: ID of the thing to link to
+    :param options: Options dictionary passed to role func.
+    """
+    #
+    base = app.config.vyos_phabricator_url
+    ref = base + slug
+    set_classes(options)
+    #print(dir(nodes))
+    node = nodes.reference(rawtext, utils.unescape(slug), refuri=ref, **options)
+    return node
+
+def vyissue_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    """Link to a BitBucket issue.
+
+    Returns 2 part tuple containing list of nodes to insert into the
+    document and a list of system messages.  Both are allowed to be
+    empty.
+
+    :param name: The role name used in the document.
+    :param rawtext: The entire markup snippet, with role.
+    :param text: The text marked with the role.
+    :param lineno: The line number where rawtext appears in the input.
+    :param inliner: The inliner instance that called us.
+    :param options: Directive options for customization.
+    :param content: The directive content for customization.
+    """
+    app = inliner.document.settings.env.app
+    node = make_link_node(rawtext, app, str(text), options)
+    '''
+    print('======')
+    print(name)
+    print(rawtext)
+    print(text)
+    print(lineno)
+    print(inliner)
+    print(options)
+    print(content)
+    print(node)
+    print('======')
+    '''
+    return [node], []
+
+def cfgcmd_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
+    app = inliner.document.settings.env.app
+    container_node = nodes.paragraph(text=text, classes=['block-cfgcmd'])
+
+    #node = nodes.container(rawtext, utils.unescape(rawtext))
+    return [container_node], []
+
+vyos_phabricator_url = 'https://phabricator.vyos.net/'
+
+
 def setup(app):
-    app.add_object_type('clicmd', 'clicmd')
+    app.add_role('vyissue', vyissue_role)
+    app.add_role('cfgcmd', cfgcmd_role)
+    app.add_config_value('vyos_phabricator_url', None, 'env')
