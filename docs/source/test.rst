@@ -6,14 +6,16 @@ Indices and tables
 
 
 
-``:vyissue:`T1206``` to  :vyissue:`T1206`
 
-
-:cfgcmd:`set test foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo <aaa | sss>`
 
 
 Var 1
 =====
+
+``:vyissue:`T1206``` to  :vyissue:`T1206`
+
+
+:cfgcmd:`set test foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo foo <aaa | sss>`
 
 .. list-table:: Title
    :widths: 25 25 50
