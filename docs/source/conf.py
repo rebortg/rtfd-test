@@ -12,9 +12,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.append(os.path.abspath("./_ext"))
 
 
 # -- Project information -----------------------------------------------------
@@ -38,7 +38,7 @@ release = '1.1'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = [
+extensions = ['vyos'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -179,6 +179,41 @@ from docutils.parsers.rst import Directive, directives
 from sphinx.util.nodes import nested_parse_with_titles
 
 
+class Label(Directive):
+
+    '''
+        generic Label directive class definition.
+        This class define a directive that shows 
+        bootstrap Labels around its content
+        *usage:*
+            .. label-<label-type>::
+                <Label content>
+        *example:*
+            .. label-default::
+                This is a default label content
+    '''
+
+    has_content = True
+    custom_class = ''
+
+    def run(self):
+        # First argument is the name of the glyph
+        # get the label content
+        text = '\n'.join(self.content)
+        # Create a new container element (div)
+        new_element = nodes.container()
+        # Update its content
+        #print(dir(self.state))
+        #print(self.content_offset)
+        #print(self.content)
+        self.state.nested_parse(self.content, self.content_offset,
+                                new_element)
+        # Set its custom bootstrap classes
+        new_element['classes'] += ['block-cfgcmd']
+        # Return one single element
+        return [new_element]
+
+
 def make_link_node(rawtext, app, slug, options):
     """Create a link to a vyos_phabricator_url.
 
@@ -201,9 +236,12 @@ def vyissue_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     node = make_link_node(rawtext, app, str(text), options)
     return [node], []
 
+
 def cfgcmd_role(name, rawtext, text, lineno, inliner, options={}, content=[]):
     app = inliner.document.settings.env.app
-    container_node = nodes.paragraph(text=text, classes=['block-cfgcmd'])
+
+    #container_node = nodes.paragraph(text=text, classes=['block-cfgcmd'])
+    container_node = nodes.container(text)
 
     #node = nodes.container(rawtext, utils.unescape(rawtext))
     return [container_node], []
@@ -213,5 +251,6 @@ vyos_phabricator_url = 'https://phabricator.vyos.net/'
 
 def setup(app):
     app.add_role('vyissue', vyissue_role)
-    app.add_role('cfgcmd', cfgcmd_role)
+    #app.add_role('cfgcmd', cfgcmd_role)
+    #app.add_directive('cfgcmd', Label)
     app.add_config_value('vyos_phabricator_url', None, 'env')

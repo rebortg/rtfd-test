@@ -1,4 +1,4 @@
-p.block-cfgcmd {
+.cfgcmd-heading {
     display: block;
     margin: 6px 0;
     font-size: 90%;
@@ -9,6 +9,37 @@ p.block-cfgcmd {
     border-top-width: 3px;
     border-top-style: solid;
     border-top-color: rgb(106, 176, 222);
-    padding: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    position: relative;
+}
+
+.cfgcmd-body {
+    margin: 6px 0;
+    padding-left: 12px;
+    position: relative;
+}
+
+
+.opcmd-heading {
+    display: block;
+    margin: 6px 0;
+    font-size: 90%;
+    line-height: normal;
+    background: #e7f2fa;
+    color: #2980B9;
+    border-top: solid 3px #6ab0de;
+    border-top-width: 3px;
+    border-top-style: solid;
+    border-top-color: rgb(106, 176, 222);
+    padding-left: 6px;
+    padding-right: 6px;
+    position: relative;
+}
+
+
+.opcmd-body {
+    margin: 6px 0;
+    padding-left: 12px;
     position: relative;
 }
