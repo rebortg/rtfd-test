@@ -28,6 +28,13 @@ Var 1
    :maxdepth: 2
    :caption: Contents:
 
+
+vyos
+VyOS
+
+I will do this.
+
+
 ******************
 Indices and tables
 ******************
