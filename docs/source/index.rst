@@ -799,8 +799,11 @@ Example Partial Config
          }
      }
   }
-  
 
+
+
+Example Partial Config
+----------------------
 
 ******************
 Indices and tables
