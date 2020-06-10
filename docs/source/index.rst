@@ -2,20 +2,12 @@
 Welcome to Template Test's documentation!!
 ##########################################
 
+.. toctree::
+   :caption: Advanced
+   :name: advanced
+   :maxdepth: 2
 
-Var 1
-=====
-
-This Is A Test
-==============
-
-lore
-
-This Is A Test
-==============
-
-lore
-
+   firewall
 
 ******************
 Indices and tables
